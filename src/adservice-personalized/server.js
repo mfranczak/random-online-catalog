@@ -6,6 +6,7 @@ const app = express();
 //app.use(express.static(__dirname + 'public'))
 
 app.get('/ads', (req, res)  => {
+    console.log('Requesting personalized ads');
     res.send({ads: [
         {id: 'abc'},
         {id: 'bcd'},

@@ -8,8 +8,15 @@ const app = express();
 app.use("/", express.static(__dirname + "/public"));
 
 app.get('/ads', async (req, res)  => {
-    const response = await fetch(ADS_SERVICE);
-    res.send(await response.json());
+    try {
+        const response = await fetch(ADS_SERVICE);
+        if (!response.ok) throw new Error(`unexpected response ${response.statusText}`);
+
+        return res.send(await response.json());    
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({});
+    }
 });
 
 //Listen port

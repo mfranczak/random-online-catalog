@@ -1,23 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: adservicep
 spec:
   selector:
     matchLabels:
-      app: frontend
+      app: adservicep
   template:
     metadata:
       labels:
-        app: frontend
+        app: adservicep
     spec:
-      serviceAccountName: default
       containers:
-        - name: frontend
-          image: random-online-catalog-frontend:latest
+        - name: adservicep
+          image: random-online-catalog-adservicep:latest
           imagePullPolicy: Never
           ports:
-          - containerPort: 8080
+          - containerPort: 8081
           # readinessProbe:
           #   initialDelaySeconds: 10
           #   httpGet:
@@ -49,9 +48,9 @@ spec:
           #   value: "shippingservice:50051"
           # - name: CHECKOUT_SERVICE_ADDR
           #   value: "checkoutservice:5050"
-          - name: ADS_SERVICE
-            #value: "adsservice:8081"
-            value: "http://adservicep.default.svc.cluster.local:8081/ads"
+          # - name: ADS_SERVICE
+          #   #value: "adsservice:8081"
+          #   value: "https://api.github.com/users/github"
           # # # ENV_PLATFORM: One of: local, gcp, aws, azure, onprem, alibaba
           # # # When not set, defaults to "local" unless running in GKE, otherwies auto-sets to gcp 
           # # - name: ENV_PLATFORM 
@@ -75,25 +74,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend
+  name: adservicep
 spec:
   type: ClusterIP
   selector:
-    app: frontend
+    app: adservicep
   ports:
-  - name: http
-    port: 80
-    targetPort: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend-external
-spec:
-  type: LoadBalancer
-  selector:
-    app: frontend
-  ports:
-  - name: http
-    port: 80
-    targetPort: 8080
+    - port: 8081
+      protocol: TCP
