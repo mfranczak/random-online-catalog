@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: adservicep
-          image: random-online-catalog-adservicep:latest
+          image: random-online-catalog-adservicep:2
           imagePullPolicy: Never
           ports:
           - containerPort: 8081

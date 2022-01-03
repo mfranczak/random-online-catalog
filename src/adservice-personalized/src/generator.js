@@ -7,11 +7,11 @@ const WAITING_TIME_TIMEOUT = 100;
 module.exports = {
     getAd: async function ()  {    
         const waitingTime = getRandomInt(WAITING_TIME_MAX);
-        
+        console.log("Waiting for PersonalizedAdsNetwork for " + WAITING_TIME_TIMEOUT + "ms");
         await timer(waitingTime); 
         
         if (waitingTime >=  WAITING_TIME_TIMEOUT) {
-            throw "PersonalizedAdsNetwork failed with Timeout";
+            throw "PersonalizedAdsNetwork failed with Timeout after " + waitingTime + "ms";
         }
 
         let sloganTemplate = slogans[getRandomInt(slogans.length-1)];
