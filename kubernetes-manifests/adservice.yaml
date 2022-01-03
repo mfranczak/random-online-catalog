@@ -1,23 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: adservice
 spec:
   selector:
     matchLabels:
-      app: frontend
+      app: adservice
   template:
     metadata:
       labels:
-        app: frontend
+        app: adservice
     spec:
-      serviceAccountName: default
       containers:
-        - name: frontend
-          image: random-online-catalog-frontend:latest
+        - name: adservice
+          image: random-online-catalog-adservice:latest
           imagePullPolicy: Never
           ports:
-          - containerPort: 8080
+          - containerPort: 8082
           # readinessProbe:
           #   initialDelaySeconds: 10
           #   httpGet:
@@ -49,9 +48,9 @@ spec:
           #   value: "shippingservice:50051"
           # - name: CHECKOUT_SERVICE_ADDR
           #   value: "checkoutservice:5050"
-          - name: AD_SERVICE_ADDR
-            # value: "http://adservicep.default.svc.cluster.local:8081/ads"
-            value: "http://adservice.default.svc.cluster.local:8082/ads"
+          # - name: ADS_SERVICE
+          #   #value: "adsservice:8081"
+          #   value: "https://api.github.com/users/github"
           # # # ENV_PLATFORM: One of: local, gcp, aws, azure, onprem, alibaba
           # # # When not set, defaults to "local" unless running in GKE, otherwies auto-sets to gcp 
           # # - name: ENV_PLATFORM 
@@ -64,36 +63,22 @@ spec:
           # #   value: "jaeger-collector:14268"
           # # - name: CYMBAL_BRANDING
           # #   value: "true"
-          # resources:
-          #   requests:
-          #     cpu: 350m
-          #     memory: 80Mi
-          #   limits:
-          #     cpu: 450m
-          #     memory: 100Mi
+          resources:
+            requests:
+              cpu: 100m
+              memory: 50Mi
+            limits:
+              cpu: 250m
+              memory: 100Mi
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend
+  name: adservice
 spec:
   type: ClusterIP
   selector:
-    app: frontend
+    app: adservice
   ports:
-  - name: http
-    port: 80
-    targetPort: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend-external
-spec:
-  type: LoadBalancer
-  selector:
-    app: frontend
-  ports:
-  - name: http
-    port: 80
-    targetPort: 8080
+    - port: 8082
+      protocol: TCP
