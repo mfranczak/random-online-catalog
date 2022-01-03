@@ -8,6 +8,9 @@ Serves index.html and collects data from internal services to display ads and ca
 #### configuration 
 (envs)
 
+### catalogservice
+Returns catalog items. Limit is a hardcoded parameter.
+
 ### adservicep
 Simulates personalized ads network. It pretends to do external API calls and it fails due to timeouts.
 
