@@ -14,5 +14,7 @@ RUN npm install
 # Bundle app source
 COPY . .
 
+ENV AD_SERVICE_ADDR "http://localhost:8082"
+
 EXPOSE 8081
 CMD [ "node", "server.js" ]

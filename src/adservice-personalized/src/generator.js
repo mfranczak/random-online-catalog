@@ -1,4 +1,5 @@
 const faker = require('faker');
+const md5 = require('md5');
 const timer = ms => new Promise( res => setTimeout(res, ms));
 
 const WAITING_TIME_MAX = 250;
@@ -15,6 +16,9 @@ module.exports = {
         }
 
         let sloganTemplate = slogans[getRandomInt(slogans.length-1)];
+        
+        console.log("Personalized Ad id#" + md5(sloganTemplate) + " delivered");
+
         return {slogan: sloganTemplate.replace("<replace>", faker.address.cityName)};
     }
 }
