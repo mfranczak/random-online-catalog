@@ -50,8 +50,8 @@ spec:
           # - name: CHECKOUT_SERVICE_ADDR
           #   value: "checkoutservice:5050"
           - name: AD_SERVICE_ADDR
-            # value: "http://adservicep.default.svc.cluster.local:8081/ads"
-            value: "http://adservice.default.svc.cluster.local:8082/ads"
+            value: "http://adservicep.default.svc.cluster.local:8081/ads"
+            # value: "http://adservice.default.svc.cluster.local:8082/ads"
           # # # ENV_PLATFORM: One of: local, gcp, aws, azure, onprem, alibaba
           # # # When not set, defaults to "local" unless running in GKE, otherwies auto-sets to gcp 
           # # - name: ENV_PLATFORM 

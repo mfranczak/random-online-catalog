@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: adservicep
-          image: random-online-catalog-adservicep:2
+          image: random-online-catalog-adservicep:latest
           imagePullPolicy: Never
           ports:
           - containerPort: 8081
@@ -34,6 +34,8 @@ spec:
           #     - name: "Cookie"
           #       value: "shop_session-id=x-liveness-probe"
           env:
+            - name: AD_SERVICE_ADDR
+              value: "http://adservice.default.svc.cluster.local:8082"
           # - name: PORT
           #   value: "8080"
           # - name: PRODUCT_CATALOG_SERVICE_ADDR
