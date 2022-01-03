@@ -14,7 +14,9 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-ENV AD_SERVICE_ADDR "http://localhost:8082"
+ENV AD_SERVICE_ADDR="http://localhost:8082"
+ENV WAITING_TIME_MAX=250
+ENV WAITING_TIME_TIMEOUT=100
 
 EXPOSE 8081
 CMD [ "node", "server.js" ]

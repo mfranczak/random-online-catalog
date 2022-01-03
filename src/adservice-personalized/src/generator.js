@@ -2,8 +2,8 @@ const faker = require('faker');
 const md5 = require('md5');
 const timer = ms => new Promise( res => setTimeout(res, ms));
 
-const WAITING_TIME_MAX = 250;
-const WAITING_TIME_TIMEOUT = 100;
+const WAITING_TIME_MAX = process.env.WAITING_TIME_MAX ?? 250;
+const WAITING_TIME_TIMEOUT = process.env.WAITING_TIME_TIMEOUT ?? 100;
 
 module.exports = {
     getAd: async function ()  {    
