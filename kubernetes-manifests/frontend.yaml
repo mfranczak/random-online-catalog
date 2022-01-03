@@ -52,6 +52,8 @@ spec:
           - name: AD_SERVICE_ADDR
             value: "http://adservicep.default.svc.cluster.local:8081/ads"
             # value: "http://adservice.default.svc.cluster.local:8082/ads"
+          - name: CATALOG_SERVICE_ADDR
+            value: "http://catalogservice.default.svc.cluster.local:8088"
           # # # ENV_PLATFORM: One of: local, gcp, aws, azure, onprem, alibaba
           # # # When not set, defaults to "local" unless running in GKE, otherwies auto-sets to gcp 
           # # - name: ENV_PLATFORM 
