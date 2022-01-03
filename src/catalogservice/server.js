@@ -2,7 +2,7 @@ const express = require('express');
 const CatalogGenerator = require('./src/generator');
 
 const app = express();
-const LIMIT = 25;
+const LIMIT = 4;
 
 app.get('/catalog/:type', (req, res)  => {    
     return res.send({type: req.params.type, items: CatalogGenerator.find(LIMIT)});

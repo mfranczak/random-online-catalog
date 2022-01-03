@@ -14,7 +14,7 @@ module.exports = {
             items.push({
                 id: md5(name),
                 name: name,
-                image: faker.image.city(640, 480),
+                image: faker.image.unsplash.imageUrl(320, 240, 'city landscape', name),
                 description: faker.lorem.words(24)
             });
         }
