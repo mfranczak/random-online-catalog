@@ -23,10 +23,11 @@ Simulates personalized ads network. It pretends to do external API calls and it 
 | WAITING_TIME_TIMEOUT | If PersonalizedNetwork waiting time is longer than WAITING_TIME_TIMEOUT then Timeout event is reported and no Ad will be returned. |
 
 ### adservice
-Simulates a legacy solution for ads that has issues with memory and is slow.
+Simulates a legacy solution for ads that has issues with memory and is slow. Algorithm first generates GENERATE_AD_VARIANTS_MAX ad variants and then selects one.
 
-#### configuration 
-(envs)
+| configuration variables |  |
+| - | - |
+| GENERATE_AD_VARIANTS_MAX | The higher the number the larger memory consumption and response time |
 
 
 ## Architecture

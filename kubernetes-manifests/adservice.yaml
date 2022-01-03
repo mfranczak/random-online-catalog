@@ -34,6 +34,8 @@ spec:
           #     - name: "Cookie"
           #       value: "shop_session-id=x-liveness-probe"
           env:
+            - name: GENERATE_AD_VARIANTS_MAX
+              value: "100000"
           # - name: PORT
           #   value: "8080"
           # - name: PRODUCT_CATALOG_SERVICE_ADDR

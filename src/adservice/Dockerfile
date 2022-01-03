@@ -14,5 +14,7 @@ RUN npm install
 # Bundle app source
 COPY . .
 
+ENV GENERATE_AD_VARIANTS_MAX=1000
+
 EXPOSE 8082
 CMD [ "node", "server.js" ]

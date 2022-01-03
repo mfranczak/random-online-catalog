@@ -4,7 +4,6 @@ const app = express();
 
 app.get('/ads', async (req, res)  => {
     try {
-        console.log('Requesting ad.');
         return res.send({ad: await LocalAds.getAd()});
     } catch (error) {
         console.log(error);
