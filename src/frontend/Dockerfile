@@ -14,7 +14,7 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-ENV ADS_SERVICE "adsservice:8081"
+ENV AD_SERVICE_ADDR "http://localhost:8081/ads"
 
 EXPOSE 8080
 CMD [ "node", "server.js" ]

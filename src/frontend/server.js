@@ -1,16 +1,17 @@
 const express = require('express');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
-const ADS_SERVICE = process.env.ADS_SERVICE;
+const AD_SERVICE_ADDR = process.env.AD_SERVICE_ADDR;
 
 const app = express();
 
 app.use("/", express.static(__dirname + "/public"));
 
-app.get('/ads', async (req, res)  => {
+app.get('/ads', async (req, res)  => {    
     try {
-        const response = await fetch(ADS_SERVICE);
-        if (!response.ok) throw new Error(`unexpected response ${response.statusText}`);
+        console.log('Fetching ads from: ' + AD_SERVICE_ADDR);
+        const response = await fetch(AD_SERVICE_ADDR);
+        if (!response.ok) throw "Unexpected response: " + response.statusText;
 
         return res.send(await response.json());    
     } catch (error) {
