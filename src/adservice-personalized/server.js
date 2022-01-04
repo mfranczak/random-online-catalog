@@ -2,21 +2,22 @@ const express = require('express');
 const PersonalizedAdsNetwork = require('./src/generator.js');
 const LegacyAdsNetwork = require('./src/legacy.js');
 const app = express();
+const logger = require('./src/logger');
+
 
 app.get('/ads', async (req, res)  => {
     try {
-        console.log('DEBUG Requesting personalized ad.');
+        logger.debug('Requesting personalized ad.');
         return res.send({ad: await PersonalizedAdsNetwork.getAd()});
     } catch (error) {
-        console.error(error);
-        console.log("WARN Fallback to LegacyAdsNetwork.")
-
+        logger.error(error);
+        logger.warn("Fallback to LegacyAdsNetwork.");
         const ad = await LegacyAdsNetwork.getAd();
         if (ad) {
             return res.send({ad: ad});    
         }
         
-        console.error("ERROR LegacyAdsNetwork failed.");
+        logger.error("LegacyAdsNetwork failed.");
         return res.status(404).send({});
     }
 });
