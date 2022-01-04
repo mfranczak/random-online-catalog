@@ -5,18 +5,18 @@ const app = express();
 
 app.get('/ads', async (req, res)  => {
     try {
-        console.log('Requesting personalized ad.');
+        console.log('DEBUG Requesting personalized ad.');
         return res.send({ad: await PersonalizedAdsNetwork.getAd()});
     } catch (error) {
         console.error(error);
-        console.log("Fallback to LegacyAdsNetwork.")
+        console.log("WARN Fallback to LegacyAdsNetwork.")
 
         const ad = await LegacyAdsNetwork.getAd();
         if (ad) {
             return res.send({ad: ad});    
         }
         
-        console.error("LegacyAdsNetwork failed.");
+        console.error("ERROR LegacyAdsNetwork failed.");
         return res.status(404).send({});
     }
 });
