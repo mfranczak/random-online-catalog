@@ -3,9 +3,9 @@ const md5 = require('md5');
 const timer = ms => new Promise( res => setTimeout(res, ms));
 const logger = require('./logger');
 
-const WAITING_TIME_MIN = process.env.WAITING_TIME_MIN ?? 25;
-const WAITING_TIME_MAX = process.env.WAITING_TIME_MAX ?? 250;
-const WAITING_TIME_TIMEOUT = process.env.WAITING_TIME_TIMEOUT ?? 100;
+const WAITING_TIME_MIN = process.env.WAITING_TIME_MIN ? parseInt(process.env.WAITING_TIME_MIN) : 25;
+const WAITING_TIME_MAX = process.env.WAITING_TIME_MAX ? parseInt(process.env.WAITING_TIME_MAX) : 250;
+const WAITING_TIME_TIMEOUT = process.env.WAITING_TIME_TIMEOUT ? parseInt(process.env.WAITING_TIME_TIMEOUT) : 100;
 
 module.exports = {
     getAd: async function ()  {    
