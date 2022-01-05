@@ -1,19 +1,24 @@
 const faker = require('faker');
+const logger = require('./logger.js');
 
 const GENERATE_AD_VARIANTS_MAX = process.env.GENERATE_AD_VARIANTS_MAX ?? 100000;
 
 module.exports = {
     getAd: async function ()  {   
         const ads = [];
-
-        console.log("Requesting ad poolSize=" + GENERATE_AD_VARIANTS_MAX);
+                
+        logger.debug("Requesting Ad from a poolSize=" + GENERATE_AD_VARIANTS_MAX);
 
         for (i = 0; i < GENERATE_AD_VARIANTS_MAX; i++) {
             let sloganTemplate = slogans[getRandomInt(slogans.length-1)];    
             ads[i] = {slogan: sloganTemplate.replace("<replace>", faker.address.cityName)}
         }
+        
+        const indx = getRandomInt(ads.length - 1);
 
-        return ads[getRandomInt(ads.length - 1)];
+        logger.info("Ad id#" + indx + " delivered")
+
+        return ads[indx];
     }
 }
 
