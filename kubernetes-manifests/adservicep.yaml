@@ -34,8 +34,8 @@ spec:
           #     - name: "Cookie"
           #       value: "shop_session-id=x-liveness-probe"
           env:
-            - name: AD_SERVICE_ADDR
-              value: "http://adservice.default.svc.cluster.local:8082"
+            - name: WAITING_TIME_MIN
+              value: "25"
             - name: WAITING_TIME_MAX
               value: "250"
             - name: WAITING_TIME_TIMEOUT
