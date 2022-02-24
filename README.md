@@ -37,6 +37,10 @@ Frontend is the only exposed service. Frontend calls *adservicep* for personalis
 ## Running on minikube
 Before building docker images locally, remember to first `minikube start` and then `eval $(minikube docker-env)` and use `imagePullPolicy: Never`
 
+## Locust load generator
+```
+docker run -p 8089:8089 -v $PWD:/mnt/locust locustio/locust -f /mnt/locust/locustfile.py
+```
 
 ## Resources
 - https://betterprogramming.pub/docker-for-node-js-in-production-b9dc0e9e48e0
