@@ -1,4 +1,4 @@
-
+const logger = require('./logger');
 
 module.exports = {
     get(type) {
@@ -7,7 +7,7 @@ module.exports = {
                 const sql = require("./azure/sql");
                 return sql;
             default:
-                console.log(type + ' datasource is not supported using default datasource=generator')
+                logger.info(type + ' datasource is not supported using default datasource=generator')
         }
         
         return require('./generator');            

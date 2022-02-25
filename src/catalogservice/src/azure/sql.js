@@ -1,4 +1,5 @@
 const sql = require('mssql');
+const logger = require('../logger');
 
 module.exports = {
     find: async function(limit) {
@@ -7,7 +8,7 @@ module.exports = {
             const result = await sql.query('select top ' + limit + ' * from Items');
             return result['recordset'];     
         } catch (err) {
-            console.log(err);
+            logger.error(err);
         }
     },
     reset: async function() {
@@ -16,7 +17,7 @@ module.exports = {
             await sql.query`IF EXISTS (SELECT * FROM sysobjects WHERE name='Items' and xtype='U') DROP TABLE Items`;                
             await sql.query`IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Items' and xtype='U') CREATE TABLE Items (id varchar(255), name varchar(255), image varchar(255), description varchar(255))`;
         } catch (err) {
-            console.log(err);
+            logger.error(err);
         }
     },
     insert: async function(item) {
@@ -33,7 +34,7 @@ module.exports = {
             await request.query("INSERT INTO [Items] VALUES (@id, @name, @image, @description)");
 
         } catch (err) {
-            console.log(err);
+            logger.error(err);
         }
     }
 }
