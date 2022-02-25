@@ -12,5 +12,7 @@ RUN npm ci --only=production
 # Bundle app source
 COPY . .
 
+ENV SQL_ADDR="none"
+
 EXPOSE 8088
 CMD [ "node", "server.js" ]
