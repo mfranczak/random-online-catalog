@@ -3,7 +3,7 @@ const sql = require('mssql');
 module.exports = {
     find: async function(limit) {
         try {
-            await sql.connect(process.env['SQL_ADDR'])
+            await connect();
             const result = await sql.query('select top ' + limit + ' * from Items');
             return result['recordset'];     
         } catch (err) {
@@ -12,7 +12,7 @@ module.exports = {
     },
     reset: async function() {
         try {        
-            await sql.connect('Server=localhost,1433;Database=catalog;User Id=sa;Password=yourStrong123#;Encrypt=false')
+            await connect();
             await sql.query`IF EXISTS (SELECT * FROM sysobjects WHERE name='Items' and xtype='U') DROP TABLE Items`;                
             await sql.query`IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Items' and xtype='U') CREATE TABLE Items (id varchar(255), name varchar(255), image varchar(255), description varchar(255))`;
         } catch (err) {
@@ -21,7 +21,7 @@ module.exports = {
     },
     insert: async function(item) {
         try {        
-            await sql.connect('Server=localhost,1433;Database=catalog;User Id=sa;Password=yourStrong123#;Encrypt=false')
+            await connect();
 
             const request = new sql.Request();
 
@@ -36,4 +36,8 @@ module.exports = {
             console.log(err);
         }
     }
+}
+
+const connect = async function() {
+    return sql.connect(process.env['SQL_ADDR']);
 }
